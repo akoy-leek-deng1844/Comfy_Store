@@ -16,7 +16,10 @@ import {
 import { ErrorElement } from "./Components";
 import { loader as landingLoader } from "./Pages/Landing";
 import { loader as singleProductLoader } from "./Pages/SingleProduct";
-
+import { loader as ProductsLoader } from "./Pages/Products";
+import { action as registerAction } from "./Pages/Register";
+import { action as loginAction } from "./Pages/LogIn";
+import { store } from './Store';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -32,6 +35,8 @@ const router = createBrowserRouter([
       {
         path: "products",
         element: <Products />,
+        errorElement: <ErrorElement />,
+        loader: ProductsLoader,
       },
       {
         path: "products/:id",
@@ -61,11 +66,13 @@ const router = createBrowserRouter([
     path: "/login",
     element: <LogIn />,
     errorElement: <Error />,
+    action: loginAction(store),
   },
   {
     path: "/register",
     element: <Register />,
     errorElement: <Error />,
+    action: registerAction,
   },
 ]);
 const App = () => {

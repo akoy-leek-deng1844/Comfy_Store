@@ -10,7 +10,7 @@ const ProductsGrid = () => {
         const dollarPrice = formatPrice(price)
         return (
           <Link
-            to={`products/:${product.id}`}
+            to={`/products/${product.id}`}
             key={product.id}
             className="card w-full shadow-lg hover:shadow-2xl transition duration-300"
           >
