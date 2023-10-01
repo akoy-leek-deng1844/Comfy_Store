@@ -9,16 +9,14 @@ const Header = () => {
   const dispatch = useDispatch();
   const handleLogout = () => {
     navigate('/');
-    dispatch(logOut());
+    dispatch(logOut());  
   }
   return (
     <header className="bg-neutral text-neutral-content py-2">
       <div className="align-element flex justify-center sm:justify-end">
-        {/* USER */}
-        {/* LINKS */}
         {user ? (
           <div className="flex gap-x-2 sm:gap-x-8 items-center">
-            <p className="text-xs sm:text-sm">Hello, {user.userName}</p>
+            <p className="text-xs sm:text-sm">Hello, {user.username}</p>
             <button className="btn btn-xs btn-outline btn-primary " onClick={handleLogout}>
               logout
             </button>

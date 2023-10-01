@@ -11,11 +11,10 @@ const HomeLayout = () => {
       {isPageLoading ? (
         <GlobalLoader />
       ) : (
-        <section className="align-element py-20">
+        <section className="align-element py-20 ">
           <Outlet />
         </section>
       )}
-      
     </>
   );
 };

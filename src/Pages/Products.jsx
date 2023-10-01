@@ -2,13 +2,31 @@ import Filters from "../Components/Filters";
 import ProductsContainer from "../Components/ProductsContainer";
 import ProductsPagination from "../Components/ProductsPagination";
 import { customUrl } from "../Utils";
+
+const allProductsQuery = (queryparams) => {
+  const { search, category, company, shipping, sort, price, page } = queryparams;
+  return {
+    queryKey: [
+      "allProducts",
+      search ?? "",
+      category ?? "all",
+      shipping ?? false,
+      sort ?? "a-z",
+      price ?? 100000,
+      company ?? "all",
+      page ?? 1
+    ],
+    queryFn: ()=> customUrl(url, {
+    params:queryparams
+  })
+  };
+}
+
 const url = "/products"; 
 
-export const loader = async ({ request }) => {
+export const loader = (queryClient)=> async ({ request }) => {
   const params = Object.fromEntries([...new URL(request.url).searchParams.entries()])
-  const response = await customUrl(url, {
-    params
-  });
+  const response = await queryClient.ensureQueryData(allProductsQuery(params));
   const products = response.data.data;
   const meta = response.data.meta;
   return { products, meta, params };
